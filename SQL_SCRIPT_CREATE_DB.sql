@@ -20,9 +20,9 @@ CREATE TABLE user_roles (
   CONSTRAINT fk_userid FOREIGN KEY (userid) REFERENCES users (userid));
 
 INSERT INTO users(username,email,password,enabled)
-VALUES ('priya','abc@abc.com','$2a$04$CO93CT2ObgMiSnMAWwoBkeFObJlMYi/wzzOnPlsTP44r7qVq0Jln2', true);
+VALUES ('user','abc@abc.com','$2a$04$MKF24TI01hO8GY3KxWO1RuQ04ytYHo7aEOFk4weHNCMVJAIRifOxC', true);
 INSERT INTO users(username,email,password,enabled)
-VALUES ('naveen','def@def.com','$2a$04$j3JpPUp6CTAe.kMWmdRNC.Wie58xDNPfcYz0DBJxWkucJ6ekJuiJm', true);
+VALUES ('admin','def@def.com','$2a$04$7Ja88I14DQba1wVEi2JPs.FoYEkHIvJuDjNNoSCP9JbPaaIYOFqxG', true);
 
 INSERT INTO user_roles (userid, role)
 VALUES (001, 'ROLE_USER');
@@ -33,7 +33,7 @@ DROP TABLE IF EXISTS music_comments;
 DROP TABLE IF EXISTS music;
 CREATE  TABLE music (
   id int(11) NOT NULL AUTO_INCREMENT,
-  name VARCHAR(45) NOT NULL,
+  name VARCHAR(255) NOT NULL,
   content longblob not null,
   PRIMARY KEY (id));
   
@@ -46,6 +46,6 @@ CREATE  TABLE music (
   );
   
   SHOW VARIABLES WHERE variable_name = 'max_allowed_packet';
-SET GLOBAL max_allowed_packet=16777216;
+SET GLOBAL max_allowed_packet=33554432;
 
  

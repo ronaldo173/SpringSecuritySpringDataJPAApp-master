@@ -29,59 +29,89 @@
 <title>Music all</title>
 </head>
 <body>
-
-
-
-	<div class="panel-group">
-		<div class="panel panel-default">
-			<div class="panel-body">
-
-				<h2>All music</h2>
-				<a href="#" class="button green small">Favorite</a> <a
-					class="button green small" href="<spring:url value='/loadMusic' />">here</a>
-
+	<div class="panel panel-default">
+		<div class="panel-header">
+			<div class="well well-lg text-center">
+				<h1>Music network!</h1>
 			</div>
 		</div>
-		<div class="panel panel-default">
-			<div class="panel-body">
-				<div class="container">
-					<h2>Table</h2>
-					<div class="table-responsive">
-						<table class="table">
-							<thead>
-								<tr>
-									<th>#</th>
-									<th>Firstname</th>
-									<th>Lastname</th>
-									<th>Age</th>
-									<th>City</th>
-									<th>Country</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>1</td>
-									<td>Anna</td>
-									<td>Pitt</td>
-									<td>35</td>
-									<td>New York</td>
-									<td>USA</td>
-								</tr>
-							</tbody>
-						</table>
+		<div class="panel-body text-center">
+			<div class="well well-lg">
+				<h2>All music</h2>
+				<a href="#" class="button green small">Favorite music</a> <a
+					class="button green small" href="<spring:url value='/home' />">Home
+					page</a>
+			</div>
+		</div>
+		<div class="panel-body">
+			<div class="well well-lg">
+				<div class="panel-group">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<div class="container">
+								<h2>All songs</h2>
+								<div class="table-responsive">
+									<table class="table">
+										<thead>
+											<tr>
+												<th>#</th>
+												<th>Music name</th>
+												<th>Music player</th>
+												<th>Play in separate window</th>
+												<th>Like</th>
+												<th>Comments</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach var="listValue" items="${listMusic}"
+												varStatus="loop">
+												<tr>
+													<td>${loop.index+1}</td>
+													<td>${listValue.name}</td>
+													<td><audio controls>
+															<source src="loadSong/${listValue.id}" type="audio/mpeg" />
+														</audio></td>
+													<td><a
+														class="btn btn-default glyphicon glyphicon-music"
+														href="<spring:url value='/loadSong/${listValue.id}' />"></a></td>
+													<td><a
+														class="btn btn-default glyphicon glyphicon-hand-up"
+														href="<spring:url value='/likeSong/${listValue.id}' />"></a></td>
+													<td>----comment--</td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		<div class="panel-body well well-lg">
+			Add song:
+			<div class="panel-body">
+				<form:form method="POST" action="/songSave"
+					enctype="multipart/form-data">
+
+					<div class="form-group">
+						<label for="name">Song name</label> <input type="text"
+							class="form-control" id="name" name="name" required
+							placeholder="Song name">
+					</div>
+					<div class="form-group">
+						Please select a file to upload : <input type="file" name=song />
+						<input type="submit" value="SAVE SONG!" /> <span><form:errors
+								path="file" cssClass="btn btn-primary" /> </span>
+					</div>
+
+				</form:form>
+			</div>
+		</div>
 	</div>
-	<div>
-		<ul>
-			<c:forEach var="listValue" items="${listMusic}">
-				<li>${listValue}, ${listValue.content}, <audio>
-						<source src="${listValue.content}" type='audio/mpeg; codecs="mp3"'>
-					</audio></li>
-			</c:forEach>
-		</ul>
-	</div>
+
+
+
 </body>
 </html>

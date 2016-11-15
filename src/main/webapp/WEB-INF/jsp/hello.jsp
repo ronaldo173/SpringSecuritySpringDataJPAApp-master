@@ -12,15 +12,16 @@
 </head>
 <body class="security-app">
 	<div class="details">
-
-		<h2>Home</h2>
-		<a href="<spring:url value='/allMusic' />">Music list</a>
+		<h2>Home page</h2>
 	</div>
 
 	<div class="lc-block">
 		<h1>
 			Hello <b><c:out value="${pageContext.request.remoteUser}"></c:out></b>
 		</h1>
+		<form action="/allMusic" method="get">
+			<input type="submit" class="button red big" value="All music" />
+		</form>
 		<form action="/logout" method="post">
 			<input type="submit" class="button red big" value="Sign Out" /> <input
 				type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
